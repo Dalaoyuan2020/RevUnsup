@@ -1,0 +1,39 @@
+# Data & Models (too large for git)
+data/
+checkpoints/
+*.ckpt
+*.onnx
+*.engine
+*.mb
+*.pth
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+
+# C++ build
+deploy/cpp_inference/build/
+deploy/dll_wrapper/build/
+*.dll
+*.so
+*.exe
+*.obj
+*.lib
+
+# C#
+deploy/csharp_ui/bin/
+deploy/csharp_ui/obj/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
