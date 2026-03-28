@@ -34,6 +34,11 @@ deploy/csharp_ui/obj/
 *.suo
 *.user
 
+# Secrets (绝对不能推到远程)
+.env
+.env.*
+secrets/
+
 # OS
 .DS_Store
 Thumbs.db
