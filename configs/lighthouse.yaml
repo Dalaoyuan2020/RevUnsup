@@ -1,0 +1,40 @@
+# 灯塔协议 — 决策记录 + 未选方案 + 预留端口
+
+agent1_training:
+  current_choices:
+    backbone: {value: resnet18, why: "旧版用的，复现优先对齐"}
+    coreset_sampling_ratio: {value: 0.1, why: "旧版配置"}
+    image_size: {value: 256, why: "旧版配置，PatchCore推荐"}
+  alternatives_not_chosen:
+    - {name: "mobilenetv3_small", why_not: "更快但精度未验证", rollback_cost: "低", when: "100ms达不到时"}
+    - {name: "wide_resnet50", why_not: "更准但更慢", rollback_cost: "低", when: "精度不够时"}
+    - {name: "coreset_ratio=0.01", why_not: "KNN更快但可能掉精度", rollback_cost: "低", when: "KNN是瓶颈时"}
+  reserved_ports:
+    - "训练脚本预留 --backbone 参数"
+    - "训练脚本预留 --augmentation 参数"
+    - "checkpoint 同时保存训练参数快照"
+
+agent2_inference_export:
+  current_choices:
+    export_format: {value: "ONNX拆分(onnx+npy+json)", why: "memory bank不能进ONNX"}
+    knn_method: {value: "暴力搜索", why: "简单，memory bank不大时够用"}
+  alternatives_not_chosen:
+    - {name: "TorchScript", why_not: "生态不如ONNX", rollback_cost: "中", when: "ONNX算子不支持时"}
+    - {name: "FAISS GPU", why_not: "更快但增加依赖", rollback_cost: "低", when: "KNN>40ms时"}
+  reserved_ports:
+    - "predict() 预留 backend 参数(python/onnx/tensorrt)"
+    - "export 预留 opset 参数"
+    - "memory_bank 保存时附带 shape+dtype 元信息"
+
+agent3_cpp_deployment:
+  current_choices:
+    inference_engine: {value: "ONNX Runtime + CUDA EP", why: "跨平台，社区成熟"}
+    ui_framework: {value: "WinForms", why: "MVP够用，开发最快"}
+  alternatives_not_chosen:
+    - {name: "TensorRT", why_not: "更快但绑定NVIDIA", rollback_cost: "中", when: "ONNX Runtime>50ms时"}
+    - {name: "FAISS GPU KNN", why_not: "增加编译依赖", rollback_cost: "低", when: "KNN>40ms时"}
+    - {name: "WPF界面", why_not: "更现代但学习成本高", rollback_cost: "高", when: "客户要求好看界面时"}
+  reserved_ports:
+    - "init() 预留 backend 参数(onnxruntime/tensorrt)"
+    - "CMake 预留 TensorRT find_package（注释状态）"
+    - "DLL 预留 AIAD_GetVersion() 和 AIAD_InferBatch()"
