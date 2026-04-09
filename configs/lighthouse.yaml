@@ -38,3 +38,27 @@ agent3_cpp_deployment:
     - "init() 预留 backend 参数(onnxruntime/tensorrt)"
     - "CMake 预留 TensorRT find_package（注释状态）"
     - "DLL 预留 AIAD_GetVersion() 和 AIAD_InferBatch()"
+
+# ────────────────────────────────────────────
+# 2026-04-09 新增：Dashboard 通信层扩展(归档)
+# 讨论了一堆扩展功能，按反过度工程化原则全部冻结，先不做
+# ────────────────────────────────────────────
+dashboard_communication:
+  current_choices:
+    deployment: {value: "GitHub Pages 静态HTML", why: "零运维，免费，秒上线"}
+    auth: {value: "前端SHA256密码门(2026)", why: "挡路人足够，不追真安全"}
+    state_sync: {value: "无后端，无跨设备同步", why: "MVP不需要"}
+  alternatives_not_chosen:
+    - {name: "看板内嵌聊天面板(localStorage单设备)", why_not: "用户尚未真正需要", rollback_cost: "低", when: "硕士生开始用面板时"}
+    - {name: "看板内嵌聊天面板(后端共享)", why_not: "需要后端，多设备未必要", rollback_cost: "中", when: "多设备同步成为痛点"}
+    - {name: "HTTP Relay API(消息中转)", why_not: "应用层路由，未到需要时", rollback_cost: "中", when: "Agent需要被远程控制时"}
+    - {name: "接入 cc2wechat 微信桥", why_not: "已有桥，未到接入时点", rollback_cost: "低", when: "聊天面板上线后"}
+    - {name: "接入 Hermes Telegram 桥", why_not: "Telegram非主用", rollback_cost: "低", when: "需要海外通信时"}
+    - {name: "复用 OpenClaw LA VPS 网络层中转", why_not: "OpenClaw部署本身在战略储备里", rollback_cost: "中", when: "多设备部署落地时"}
+    - {name: "Windsurf 多Agent coding 接入", why_not: "暂用现有Agent方案", rollback_cost: "中", when: "切换到Windsurf作为主coding时"}
+    - {name: "硬件地图文档(3台电脑)", why_not: "脑中知道即可", rollback_cost: "极低", when: "团队扩大或交接时"}
+  reserved_ports:
+    - "Dashboard 预留 chat-panel 区域(supervisor.html可加)"
+    - "未来 Relay API 路径预留: /api/relay/send /api/relay/recv /api/relay/history"
+    - "未来 Bridge 适配器接口: bridge.send(target, msg) bridge.poll()"
+    - "Dashboard 已有的 sessionStorage 可后续升级为带过期的 token"
