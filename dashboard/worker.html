@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker端 — RevUnsup Harness</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0a0a0a; color: #fff; min-height: 100vh; }
+        .header { background: linear-gradient(135deg, #3b82f6, #2563eb); padding: 20px; display: flex; align-items: center; gap: 12px; }
+        .header a { color: #fff; text-decoration: none; font-size: 20px; }
+        .header h1 { font-size: 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .card h2 { font-size: 18px; margin-bottom: 16px; color: #3b82f6; }
+        .card p { color: #aaa; line-height: 1.7; font-size: 14px; }
+        .task-box { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .task-box .label { font-size: 12px; color: #888; margin-bottom: 4px; }
+        .task-box .value { font-size: 16px; }
+        .step { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px; }
+        .step:last-child { border-bottom: none; }
+        .step .num { width: 28px; height: 28px; background: rgba(59,130,246,0.2); color: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+        .step .desc { flex: 1; font-size: 14px; }
+        .placeholder { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html">←</a>
+        <h1>⚙️ Worker — L1 执行端</h1>
+    </div>
+    <div class="container">
+
+        <div class="card">
+            <h2>📥 当前任务</h2>
+            <div class="task-box">
+                <div class="label">实验ID</div>
+                <div class="value placeholder">尚未派单</div>
+            </div>
+            <div class="task-box">
+                <div class="label">要试的杠杆</div>
+                <div class="value placeholder">等待编排器派任务</div>
+            </div>
+            <div class="task-box">
+                <div class="label">测试集</div>
+                <div class="value placeholder">test_set/v0.6 (60%已整理)</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔄 执行步骤</h2>
+            <div class="step">
+                <div class="num">1</div>
+                <div class="desc">读取当前 baseline.json</div>
+            </div>
+            <div class="step">
+                <div class="num">2</div>
+                <div class="desc">应用本次杠杆 (例: 改输入分辨率)</div>
+            </div>
+            <div class="step">
+                <div class="num">3</div>
+                <div class="desc">遍历测试集，喂图给 .exe</div>
+            </div>
+            <div class="step">
+                <div class="num">4</div>
+                <div class="desc">收集精度 + 推理时间</div>
+            </div>
+            <div class="step">
+                <div class="num">5</div>
+                <div class="desc">写入 evaluations/&lt;日期&gt;/&lt;实验ID&gt;.json</div>
+            </div>
+            <div class="step">
+                <div class="num">6</div>
+                <div class="desc">报告完成 → 回到 L3 评估</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📊 本次实验结果</h2>
+            <p class="placeholder">实验未开始</p>
+        </div>
+
+        <div class="card" style="border-color:rgba(59,130,246,0.3);">
+            <h2>⚙️ Worker守则</h2>
+            <p>
+            ① 一次只跑一个杠杆 (变量隔离)<br>
+            ② 失败也要留完整记录 (不丢数据)<br>
+            ③ 不做算法决策 (那是 L2 的事)<br>
+            ④ 不做最终评判 (那是 L3 的事)
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

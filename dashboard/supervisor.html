@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监督端 — RevUnsup Harness</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0a0a0a; color: #fff; min-height: 100vh; }
+        .header { background: linear-gradient(135deg, #10b981, #059669); padding: 20px; display: flex; align-items: center; gap: 12px; }
+        .header a { color: #fff; text-decoration: none; font-size: 20px; }
+        .header h1 { font-size: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; }
+        .card h2 { font-size: 16px; margin-bottom: 14px; color: #10b981; display: flex; align-items: center; gap: 8px; }
+        .card .badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: rgba(16,185,129,0.2); color: #10b981; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+        @media (min-width: 900px) { .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+        .row:last-child { border-bottom: none; }
+        .row .k { color: #888; }
+        .row .v { color: #fff; font-weight: 500; }
+        .ok { color: #10b981; }
+        .warn { color: #f59e0b; }
+        .bad { color: #ef4444; }
+        .placeholder { color: #555; font-style: italic; }
+        .anomaly { background: rgba(239,68,68,0.1); border-left: 3px solid #ef4444; padding: 10px; border-radius: 4px; margin-top: 10px; font-size: 13px; color: #fca5a5; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html">←</a>
+        <h1>👁️ 硕士生 — L4 监督端</h1>
+    </div>
+    <div class="container">
+
+        <!-- 4维评价卡片 (对应 L3 评估层) -->
+        <div class="grid-4">
+            <div class="card">
+                <h2>📦 数据集 <span class="badge">L3①</span></h2>
+                <div class="row"><span class="k">质量</span><span class="v warn">待复审</span></div>
+                <div class="row"><span class="k">数量</span><span class="v warn">60% (~30张)</span></div>
+                <div class="row"><span class="k">丰富度</span><span class="v warn">分桶中</span></div>
+                <div class="row"><span class="k">补充计划</span><span class="v">人工补40%</span></div>
+            </div>
+
+            <div class="card">
+                <h2>🤖 模型 <span class="badge">L3②</span></h2>
+                <div class="row"><span class="k">静态-健壮性</span><span class="v placeholder">未测</span></div>
+                <div class="row"><span class="k">静态-完整性</span><span class="v placeholder">未测</span></div>
+                <div class="row"><span class="k">动态-精度</span><span class="v placeholder">待baseline</span></div>
+                <div class="row"><span class="k">动态-耗时</span><span class="v placeholder">待baseline</span></div>
+            </div>
+
+            <div class="card">
+                <h2>📂 打包文件 <span class="badge">L3③</span></h2>
+                <div class="row"><span class="k">可复用性</span><span class="v placeholder">未评</span></div>
+                <div class="row"><span class="k">格式规范</span><span class="v placeholder">未评</span></div>
+                <div class="row"><span class="k">接口探测</span><span class="v warn">Agent待跑</span></div>
+                <div class="row"><span class="k">说明书</span><span class="v placeholder">待生成</span></div>
+            </div>
+
+            <div class="card">
+                <h2>📋 评价记录 <span class="badge">L3④</span></h2>
+                <div class="row"><span class="k">今日实验数</span><span class="v">0</span></div>
+                <div class="row"><span class="k">当前最优</span><span class="v placeholder">—</span></div>
+                <div class="row"><span class="k">异常标记</span><span class="v ok">无</span></div>
+                <div class="row"><span class="k">本周报告</span><span class="v placeholder">待写</span></div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+            <h2>🔍 数据完整性核查 (硕士生每日工作)</h2>
+            <div class="row"><span class="k">experiments.json 字段完整</span><span class="v ok">N/A</span></div>
+            <div class="row"><span class="k">baseline.json 已锁定</span><span class="v warn">未锁定</span></div>
+            <div class="row"><span class="k">test_set 元数据完整</span><span class="v warn">部分</span></div>
+            <div class="row"><span class="k">缺失/错误记录数</span><span class="v">0</span></div>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+            <h2>⚠️ 异常 case 标记</h2>
+            <p class="placeholder">尚无标记。Worker 跑实验后，硕士生在此添加异常case的人工备注。</p>
+        </div>
+
+        <div class="card" style="border-color:rgba(16,185,129,0.3);">
+            <h2>👁️ 守门人守则</h2>
+            <p style="color:#aaa;font-size:14px;line-height:1.7;">
+            ① 每天看面板 (5分钟)<br>
+            ② 核查 L4 状态盘数据完整性<br>
+            ③ 标记异常 case 但不解释原因<br>
+            ④ 周报汇总<br>
+            ⑤ 外围辅助任务 (按需，不重要的活)<br>
+            ❌ 不参与算法决策<br>
+            ❌ 不动核心代码
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

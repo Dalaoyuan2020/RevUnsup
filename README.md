@@ -104,6 +104,42 @@ cd deploy/cpp_inference && cmake -B build && cmake --build build
 
 详见 [docs/AGENT_TASKS.md](./docs/AGENT_TASKS.md)
 
+## v0.2 — Harness 自动化升级（2026-04-09）
+
+从【三Agent手动分工版】升级到【Harness编排自动版】。
+
+新加入的层：
+- **L2 编排层**：博士生看面板做决策，不亲自整理数据/不写脚本
+- **L3 评估层**：4维评价(数据集/模型/打包文件/评价方式) — 见 [docs/L3-evaluation-spec.md](./docs/L3-evaluation-spec.md)
+- **L4 监督层**：硕士生作为状态守门人，看面板/标异常/写周报
+- **Dashboard**：[dashboard/](./dashboard/) 下的4个静态HTML，三端可视化
+
+任务分配优先级（劳动力协议）：
+```
+① Agent (默认首选)
+② 硕士生 (Agent搞不定的兜底)
+③ 博士生 (战略决策/评价体系/编排逻辑)
+```
+
+不可外包的事（必须博士生做）：
+- 战略决策（论文方向、实验设计）
+- 评价体系本身的设计（什么算"提升"）
+- 编排逻辑（下一步做什么）
+
+详见 [docs/L3-evaluation-spec.md](./docs/L3-evaluation-spec.md) 的 §6.1 任务分配优先级。
+
+### Dashboard 入口
+
+```
+dashboard/
+├── index.html         # 首页(三角架构图)
+├── orchestrator.html  # 博士生编排端
+├── worker.html        # Worker执行端
+└── supervisor.html    # 硕士生监督端
+```
+
+本地直接打开 `dashboard/index.html` 即可预览。
+
 ## License
 
 MIT

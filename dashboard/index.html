@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevUnsup Harness — 黑盒缺陷检测优化系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0a0a; color: #fff; min-height: 100vh; }
+
+        /* 首页封面 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%);
+        }
+
+        .logo { font-size: 64px; margin-bottom: 10px; }
+        .title { font-size: 42px; font-weight: 800; letter-spacing: 8px; margin-bottom: 8px; }
+        .subtitle { font-size: 18px; color: #888; margin-bottom: 60px; letter-spacing: 2px; }
+
+        /* 三角制衡图 */
+        .triangle-container {
+            position: relative;
+            width: 400px;
+            height: 380px;
+            margin-bottom: 50px;
+        }
+
+        .role-node {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+        }
+        .role-node:hover { transform: scale(1.12); }
+        .role-node .icon { font-size: 36px; margin-bottom: 6px; }
+        .role-node .label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+
+        /* 教练 - 顶部 */
+        .coach {
+            top: 0; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 0 30px rgba(245,158,11,0.3);
+        }
+        /* 学生 - 左下 */
+        .student {
+            bottom: 0; left: 20px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 0 30px rgba(59,130,246,0.3);
+        }
+        /* 家长 - 右下 */
+        .parent {
+            bottom: 0; right: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 0 30px rgba(16,185,129,0.3);
+        }
+
+        /* 连接线 */
+        .triangle-lines {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+        .triangle-lines svg { width: 100%; height: 100%; }
+        .triangle-lines line {
+            stroke: rgba(255,255,255,0.15);
+            stroke-width: 2;
+            stroke-dasharray: 8 4;
+        }
+
+        /* 连接线标签 */
+        .link-label {
+            position: absolute;
+            font-size: 11px;
+            color: #666;
+            white-space: nowrap;
+        }
+        .link-coach-student { top: 55%; left: 8%; }
+        .link-coach-parent { top: 55%; right: 8%; }
+        .link-student-parent { bottom: 25px; left: 50%; transform: translateX(-50%); }
+
+        /* 核心理念 */
+        .principles {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .principle {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 24px;
+            width: 260px;
+            text-align: center;
+        }
+        .principle h3 { font-size: 16px; margin-bottom: 8px; }
+        .principle p { font-size: 13px; color: #888; line-height: 1.6; }
+
+        /* 入口按钮 */
+        .entries {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .entry-btn {
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .entry-btn:hover { transform: translateY(-3px); }
+        .btn-coach { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .btn-student { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .btn-parent { background: linear-gradient(135deg, #10b981, #059669); }
+
+        .footer {
+            margin-top: 60px;
+            font-size: 12px;
+            color: #444;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="logo">🔬</div>
+        <div class="title">REVUNSUP</div>
+        <div class="subtitle">三层协作 · 黑盒优化 · 驾驭工程</div>
+
+        <!-- 三角制衡图 -->
+        <div class="triangle-container">
+            <div class="triangle-lines">
+                <svg viewBox="0 0 400 380">
+                    <!-- 教练-学生 -->
+                    <line x1="200" y1="80" x2="80" y2="300" />
+                    <!-- 教练-家长 -->
+                    <line x1="200" y1="80" x2="320" y2="300" />
+                    <!-- 学生-家长 -->
+                    <line x1="80" y1="300" x2="320" y2="300" />
+                </svg>
+            </div>
+
+            <a href="orchestrator.html" class="role-node coach">
+                <span class="icon">🧠</span>
+                博士生
+                <span class="label">L2 编排</span>
+            </a>
+            <a href="worker.html" class="role-node student">
+                <span class="icon">⚙️</span>
+                Worker
+                <span class="label">L1 执行</span>
+            </a>
+            <a href="supervisor.html" class="role-node parent">
+                <span class="icon">👁️</span>
+                硕士生
+                <span class="label">L4 监督</span>
+            </a>
+
+            <span class="link-label link-coach-student">派任务 ↓<br>↑ 汇报结果</span>
+            <span class="link-label link-coach-parent">同步状态 ↓<br>↑ 异常报告</span>
+            <span class="link-label link-student-parent">← 实验数据 | 守门核查 →</span>
+        </div>
+
+        <!-- 核心理念 -->
+        <div class="principles">
+            <div class="principle">
+                <h3>🧠 博士生编排</h3>
+                <p>看面板再决策<br>不亲自整理数据<br>不写脚本<br>时间是最稀缺资源</p>
+            </div>
+            <div class="principle">
+                <h3>⚙️ Worker执行</h3>
+                <p>跑实验·收metric<br>1次1个杠杆<br>结果进L4状态盘<br>失败也要留记录</p>
+            </div>
+            <div class="principle">
+                <h3>👁️ 硕士生守门</h3>
+                <p>每日看面板<br>核查数据完整性<br>标记异常case<br>周报+外围辅助</p>
+            </div>
+        </div>
+
+        <!-- 入口 -->
+        <div class="entries">
+            <a href="orchestrator.html" class="entry-btn btn-coach">编排端</a>
+            <a href="worker.html" class="entry-btn btn-student">Worker端</a>
+            <a href="supervisor.html" class="entry-btn btn-parent">监督端</a>
+        </div>
+
+        <div class="footer">
+            RevUnsup Harness v0.1 — 驾驭工程<br>
+            黑盒优化 · 三层协作 · 收敛迭代
+        </div>
+    </div>
+</body>
+</html>
