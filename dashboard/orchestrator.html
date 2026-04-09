@@ -34,16 +34,16 @@
     </div>
     <div class="container">
 
-        <div class="card" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.05);">
-            <h2>🔥 当前活跃任务</h2>
+        <div class="card" style="border-color:rgba(16,185,129,0.5);background:rgba(16,185,129,0.05);">
+            <h2>✅ 已完成任务</h2>
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-                <span style="background:#f59e0b;color:#000;padding:4px 10px;border-radius:6px;font-weight:700;font-size:12px;">RU-001</span>
-                <span style="background:rgba(239,68,68,0.2);color:#ef4444;padding:4px 10px;border-radius:6px;font-size:11px;">P0 · 阻塞下游</span>
-                <span style="color:#888;font-size:12px;">状态: TODO</span>
+                <span style="background:#10b981;color:#000;padding:4px 10px;border-radius:6px;font-weight:700;font-size:12px;">RU-001</span>
+                <span style="background:rgba(16,185,129,0.2);color:#10b981;padding:4px 10px;border-radius:6px;font-size:11px;">DONE by DogWind</span>
+                <span style="color:#888;font-size:12px;">2026-04-09</span>
             </div>
-            <div style="font-size:15px;color:#fff;margin-bottom:6px;font-weight:600;">封装版代码地图</div>
-            <div style="font-size:13px;color:#aaa;line-height:1.6;">消化封装版代码，回答 8 个问题，输出认知地基。这是 baseline 和后续杠杆决策的前置依赖。</div>
-            <div style="margin-top:10px;font-size:11px;color:#666;">📄 详见 <code>tasks/RU-001.md</code></div>
+            <div style="font-size:15px;color:#fff;margin-bottom:6px;font-weight:600;">封装版代码地图 ✅</div>
+            <div style="font-size:13px;color:#aaa;line-height:1.6;">DogWind 完成, 发现 3 个金矿: modelInputW/H 硬编码可绕过 + KNN 分块搜索瓶颈 + 阈值被平方的陷阱。</div>
+            <div style="margin-top:10px;font-size:11px;color:#666;">📄 <code>docs/封装版代码地图.md</code> · 附 3 份解密源码</div>
         </div>
 
         <div class="card">
@@ -70,30 +70,50 @@
 
         <div class="card">
             <h2>🎯 决策：下一个杠杆试什么</h2>
-            <p>这是博士生唯一不可外包的事：根据当前状态，决定下一步派 Worker 试哪个杠杆。</p>
-            <ul class="lever-list" style="margin-top:16px;">
+            <p>这是博士生唯一不可外包的事：根据当前状态，决定下一步派 Worker 试哪个杠杆。<br>
+            <span style="color:#f59e0b;font-size:12px;">⚡ 基于 RU-001 封装版代码地图, 真实接口级别杠杆, 2026-04-09 更新</span></p>
+
+            <div style="font-size:12px;color:#888;margin:14px 0 6px;">⚡ 提速度(推理时间)</div>
+            <ul class="lever-list">
                 <li class="lever-item">
-                    <div class="name">L1 输入分辨率调整</div>
-                    <div class="desc">改变输入图分辨率，影响精度和速度</div>
+                    <div class="name">S1 缩小 modelInputW/H 🔥</div>
+                    <div class="desc">封装版硬编码为原图尺寸, 外部调用时改小 Mat → 立刻提速 2-4x</div>
                 </li>
                 <li class="lever-item">
-                    <div class="name">L2 切图策略</div>
-                    <div class="desc">大图切小patch再合并(提小目标精度)</div>
+                    <div class="name">S2 调整 cutSize (分块数)</div>
+                    <div class="desc">封装版硬编码 -1 自动, 手动设置能减少分块开销</div>
                 </li>
                 <li class="lever-item">
-                    <div class="name">L3 命令行参数调优</div>
-                    <div class="desc">如果exe接受阈值/batch等参数</div>
+                    <div class="name">S3 maxSearchNaxFeatrueSize1</div>
+                    <div class="desc">modelConfig.yaml 里的 KNN 分块搜索上限(默认1.4e9), 是耗时主要瓶颈</div>
                 </li>
                 <li class="lever-item">
-                    <div class="name">L4 TTA(测试时增强)</div>
-                    <div class="desc">原图+翻转+多尺度结果融合</div>
+                    <div class="name">S4 coreset_sampling_ratio ↓</div>
+                    <div class="desc">训练时降采样率, 减小 Memory Bank, 推理更快但可能掉精度</div>
                 </li>
                 <li class="lever-item">
-                    <div class="name">L5 后处理优化</div>
-                    <div class="desc">在exe输出后再做NMS/过滤/重排</div>
+                    <div class="name">S5 ONNX/TensorRT 导出</div>
+                    <div class="desc">绕过 LibTorch, TensorRT 预期 2-5x 提速, 工作量大</div>
                 </li>
             </ul>
-            <button class="btn" style="margin-top:16px;" disabled>派任务给Worker (待接通)</button>
+
+            <div style="font-size:12px;color:#888;margin:18px 0 6px;">🎯 提精度(检测质量)</div>
+            <ul class="lever-list">
+                <li class="lever-item">
+                    <div class="name">A1 阈值调优 ⚠️陷阱</div>
+                    <div class="desc">thresh = pow(thresh, 2.0) 内部平方! 传 0.1 实际 0.01, 所有调参必须知道</div>
+                </li>
+                <li class="lever-item">
+                    <div class="name">A2 gammaCorrection 调整</div>
+                    <div class="desc">当前 gamma=1.2 压低低分缺陷, 改 1.0 或去掉会提升弱缺陷可见度</div>
+                </li>
+                <li class="lever-item">
+                    <div class="name">A3 修 layerchoose bug</div>
+                    <div class="desc">train.py:143 layerchoose[2]==1 追加 'layer2' 疑似应为 'layer4', 复制粘贴错误</div>
+                </li>
+            </ul>
+
+            <button class="btn" style="margin-top:16px;" disabled>派任务给Worker (等 RU-002)</button>
         </div>
 
         <div class="card">
