@@ -1,0 +1,188 @@
+{
+  "date": "2026-04-13",
+  "based_on": "baseline_cdist.json",
+  "config": {
+    "knn": "FP16 chunked matmul (pre-alloc, hybrid chunks)",
+    "memory_bank_dtype": "fp16",
+    "compute": "torch.mm FP16 → Tensor Core",
+    "chunks": {
+      "patch0": 256,
+      "patch1": 512
+    },
+    "technique": "||a-b||²=||a||²+||b||²-2a·b, chunked to fit L2 cache"
+  },
+  "runs_per_image": 5,
+  "images": [
+    {
+      "name": "2.jpg",
+      "times_ms": [
+        135.79,
+        135.55,
+        136.02,
+        138.53,
+        135.89
+      ],
+      "mean_ms": 136.36,
+      "std_ms": 1.1,
+      "knn_times_ms": [
+        71.86,
+        70.92,
+        71.48,
+        73.7,
+        70.93
+      ],
+      "knn_mean_ms": 71.78,
+      "knn_std_ms": 1.02,
+      "anomaly_score": 1.091516,
+      "ret": 1,
+      "baseline_score": 1.092568,
+      "score_deviation_pct": 0.1,
+      "ret_match": true
+    },
+    {
+      "name": "5.jpg",
+      "times_ms": [
+        138.5,
+        136.13,
+        135.96,
+        134.59,
+        136.89
+      ],
+      "mean_ms": 136.41,
+      "std_ms": 1.28,
+      "knn_times_ms": [
+        73.41,
+        70.61,
+        71.18,
+        71.79,
+        71.32
+      ],
+      "knn_mean_ms": 71.66,
+      "knn_std_ms": 0.95,
+      "anomaly_score": 1.140518,
+      "ret": 1,
+      "baseline_score": 1.140291,
+      "score_deviation_pct": 0.02,
+      "ret_match": true
+    },
+    {
+      "name": "034-169-301(1)-temp5.jpg",
+      "times_ms": [
+        132.84,
+        132.58,
+        131.53,
+        133.42,
+        133.33
+      ],
+      "mean_ms": 132.74,
+      "std_ms": 0.68,
+      "knn_times_ms": [
+        71.24,
+        72.93,
+        71.63,
+        71.31,
+        70.95
+      ],
+      "knn_mean_ms": 71.61,
+      "knn_std_ms": 0.69,
+      "anomaly_score": 1.163407,
+      "ret": 1,
+      "baseline_score": 1.163827,
+      "score_deviation_pct": 0.04,
+      "ret_match": true
+    },
+    {
+      "name": "273-263-201(1)-temp5.jpg",
+      "times_ms": [
+        129.8,
+        129.92,
+        131.87,
+        132.6,
+        135.37
+      ],
+      "mean_ms": 131.91,
+      "std_ms": 2.04,
+      "knn_times_ms": [
+        70.35,
+        71.23,
+        72.42,
+        70.7,
+        71.57
+      ],
+      "knn_mean_ms": 71.25,
+      "knn_std_ms": 0.72,
+      "anomaly_score": 1.165922,
+      "ret": 1,
+      "baseline_score": 1.165828,
+      "score_deviation_pct": 0.01,
+      "ret_match": true
+    },
+    {
+      "name": "274-244-202(1)-temp2.jpg",
+      "times_ms": [
+        131.87,
+        131.67,
+        132.43,
+        132.67,
+        131.96
+      ],
+      "mean_ms": 132.12,
+      "std_ms": 0.37,
+      "knn_times_ms": [
+        72.93,
+        70.8,
+        70.29,
+        70.75,
+        71.0
+      ],
+      "knn_mean_ms": 71.15,
+      "knn_std_ms": 0.92,
+      "anomaly_score": 1.137946,
+      "ret": 1,
+      "baseline_score": 1.139017,
+      "score_deviation_pct": 0.09,
+      "ret_match": true
+    },
+    {
+      "name": "276-176-301(1)-temp5.jpg",
+      "times_ms": [
+        131.39,
+        130.4,
+        131.99,
+        134.3,
+        131.8
+      ],
+      "mean_ms": 131.98,
+      "std_ms": 1.29,
+      "knn_times_ms": [
+        71.95,
+        70.22,
+        70.81,
+        71.84,
+        70.2
+      ],
+      "knn_mean_ms": 71.0,
+      "knn_std_ms": 0.76,
+      "anomaly_score": 1.168432,
+      "ret": 1,
+      "baseline_score": 1.168516,
+      "score_deviation_pct": 0.01,
+      "ret_match": true
+    }
+  ],
+  "summary": {
+    "total_mean_ms": 133.59,
+    "total_std_ms": 2.0,
+    "knn_mean_ms": 71.41,
+    "knn_std_ms": 0.29,
+    "speedup_knn": "3.26x",
+    "speedup_total": "2.20x",
+    "max_score_deviation_pct": 0.1,
+    "all_ret_match": true,
+    "precision_pass": true,
+    "target_40ms": false
+  },
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "pytorch": "2.11.0+cu128",
+  "peak_gpu_memory_mb": 738.0
+}
