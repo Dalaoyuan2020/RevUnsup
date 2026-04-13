@@ -1,0 +1,169 @@
+{
+  "date": "2026-04-13",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "pytorch": "2.11.0+cu128",
+  "config": {
+    "knn": "torch.cdist (GPU)",
+    "thresh_input": 0.1,
+    "thresh_eff": 0.010000000000000002
+  },
+  "memory_bank": {
+    "patch0_shape": [
+      17891,
+      128
+    ],
+    "patch1_shape": [
+      6586,
+      128
+    ]
+  },
+  "runs_per_image": 5,
+  "images": [
+    {
+      "name": "2.jpg",
+      "times_ms": [
+        295.29,
+        295.91,
+        296.34,
+        295.01,
+        294.74
+      ],
+      "mean_ms": 295.46,
+      "std_ms": 0.59,
+      "cdist_times_ms": [
+        233.03,
+        232.68,
+        235.19,
+        232.71,
+        231.41
+      ],
+      "cdist_mean_ms": 233.0,
+      "cdist_std_ms": 1.23,
+      "anomaly_score": 1.092568,
+      "ret": 1
+    },
+    {
+      "name": "5.jpg",
+      "times_ms": [
+        295.72,
+        296.98,
+        297.35,
+        291.26,
+        284.43
+      ],
+      "mean_ms": 293.15,
+      "std_ms": 4.87,
+      "cdist_times_ms": [
+        232.97,
+        233.62,
+        233.36,
+        228.1,
+        225.8
+      ],
+      "cdist_mean_ms": 230.77,
+      "cdist_std_ms": 3.21,
+      "anomaly_score": 1.140291,
+      "ret": 1
+    },
+    {
+      "name": "034-169-301(1)-temp5.jpg",
+      "times_ms": [
+        290.7,
+        289.32,
+        293.4,
+        291.94,
+        290.42
+      ],
+      "mean_ms": 291.16,
+      "std_ms": 1.4,
+      "cdist_times_ms": [
+        230.78,
+        231.34,
+        233.2,
+        231.76,
+        230.98
+      ],
+      "cdist_mean_ms": 231.61,
+      "cdist_std_ms": 0.86,
+      "anomaly_score": 1.163827,
+      "ret": 1
+    },
+    {
+      "name": "273-263-201(1)-temp5.jpg",
+      "times_ms": [
+        291.48,
+        291.89,
+        292.94,
+        295.12,
+        294.68
+      ],
+      "mean_ms": 293.22,
+      "std_ms": 1.46,
+      "cdist_times_ms": [
+        233.23,
+        231.78,
+        232.48,
+        234.0,
+        233.41
+      ],
+      "cdist_mean_ms": 232.98,
+      "cdist_std_ms": 0.77,
+      "anomaly_score": 1.165828,
+      "ret": 1
+    },
+    {
+      "name": "274-244-202(1)-temp2.jpg",
+      "times_ms": [
+        296.85,
+        294.76,
+        297.52,
+        294.99,
+        294.41
+      ],
+      "mean_ms": 295.71,
+      "std_ms": 1.24,
+      "cdist_times_ms": [
+        235.46,
+        235.5,
+        235.75,
+        234.06,
+        233.51
+      ],
+      "cdist_mean_ms": 234.86,
+      "cdist_std_ms": 0.9,
+      "anomaly_score": 1.139017,
+      "ret": 1
+    },
+    {
+      "name": "276-176-301(1)-temp5.jpg",
+      "times_ms": [
+        296.79,
+        293.85,
+        294.59,
+        297.88,
+        294.44
+      ],
+      "mean_ms": 295.51,
+      "std_ms": 1.55,
+      "cdist_times_ms": [
+        233.77,
+        234.75,
+        233.68,
+        236.42,
+        233.07
+      ],
+      "cdist_mean_ms": 234.34,
+      "cdist_std_ms": 1.17,
+      "anomaly_score": 1.168516,
+      "ret": 1
+    }
+  ],
+  "summary": {
+    "total_mean_ms": 294.04,
+    "total_std_ms": 1.67,
+    "cdist_mean_ms": 232.93,
+    "cdist_std_ms": 1.42,
+    "cdist_pct": "79.2%"
+  },
+  "locked": true
+}

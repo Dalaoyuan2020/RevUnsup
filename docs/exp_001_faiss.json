@@ -1,0 +1,181 @@
+{
+  "date": "2026-04-13",
+  "based_on": "baseline_cdist.json",
+  "config": {
+    "knn": "faiss.IndexIVFFlat (CPU)",
+    "nlist": 100,
+    "nprobe": 10,
+    "threads": 20
+  },
+  "runs_per_image": 5,
+  "images": [
+    {
+      "name": "2.jpg",
+      "times_ms": [
+        2309.88,
+        2268.28,
+        2243.7,
+        2299.46,
+        2212.07
+      ],
+      "mean_ms": 2266.68,
+      "std_ms": 35.93,
+      "knn_times_ms": [
+        2244.25,
+        2203.59,
+        2176.18,
+        2235.03,
+        2146.96
+      ],
+      "knn_mean_ms": 2201.2,
+      "knn_std_ms": 36.25,
+      "anomaly_score": 1.092567,
+      "ret": 1,
+      "baseline_score": 1.092568,
+      "score_deviation_pct": 0.0,
+      "ret_match": true
+    },
+    {
+      "name": "5.jpg",
+      "times_ms": [
+        2528.65,
+        2207.33,
+        2178.31,
+        2233.48,
+        2262.45
+      ],
+      "mean_ms": 2282.04,
+      "std_ms": 126.41,
+      "knn_times_ms": [
+        2465.9,
+        2142.85,
+        2114.74,
+        2167.84,
+        2196.26
+      ],
+      "knn_mean_ms": 2217.52,
+      "knn_std_ms": 127.08,
+      "anomaly_score": 1.14029,
+      "ret": 1,
+      "baseline_score": 1.140291,
+      "score_deviation_pct": 0.0,
+      "ret_match": true
+    },
+    {
+      "name": "034-169-301(1)-temp5.jpg",
+      "times_ms": [
+        1956.85,
+        1975.09,
+        1903.44,
+        1959.27,
+        1954.85
+      ],
+      "mean_ms": 1949.9,
+      "std_ms": 24.31,
+      "knn_times_ms": [
+        1896.33,
+        1914.84,
+        1843.78,
+        1899.09,
+        1892.1
+      ],
+      "knn_mean_ms": 1889.23,
+      "knn_std_ms": 23.99,
+      "anomaly_score": 1.163828,
+      "ret": 1,
+      "baseline_score": 1.163827,
+      "score_deviation_pct": 0.0,
+      "ret_match": true
+    },
+    {
+      "name": "273-263-201(1)-temp5.jpg",
+      "times_ms": [
+        1930.11,
+        1915.78,
+        1976.78,
+        1924.81,
+        1926.65
+      ],
+      "mean_ms": 1934.83,
+      "std_ms": 21.5,
+      "knn_times_ms": [
+        1870.87,
+        1855.43,
+        1916.62,
+        1865.12,
+        1867.63
+      ],
+      "knn_mean_ms": 1875.13,
+      "knn_std_ms": 21.37,
+      "anomaly_score": 1.165828,
+      "ret": 1,
+      "baseline_score": 1.165828,
+      "score_deviation_pct": 0.0,
+      "ret_match": true
+    },
+    {
+      "name": "274-244-202(1)-temp2.jpg",
+      "times_ms": [
+        1986.02,
+        2324.37,
+        1985.28,
+        2009.62,
+        2054.0
+      ],
+      "mean_ms": 2071.86,
+      "std_ms": 128.7,
+      "knn_times_ms": [
+        1924.82,
+        2264.58,
+        1925.79,
+        1946.71,
+        1993.09
+      ],
+      "knn_mean_ms": 2011.0,
+      "knn_std_ms": 129.19,
+      "anomaly_score": 1.160502,
+      "ret": 1,
+      "baseline_score": 1.139017,
+      "score_deviation_pct": 1.89,
+      "ret_match": true
+    },
+    {
+      "name": "276-176-301(1)-temp5.jpg",
+      "times_ms": [
+        1955.43,
+        1958.38,
+        1941.25,
+        1995.62,
+        1959.02
+      ],
+      "mean_ms": 1961.94,
+      "std_ms": 18.03,
+      "knn_times_ms": [
+        1895.01,
+        1898.2,
+        1881.55,
+        1935.72,
+        1899.87
+      ],
+      "knn_mean_ms": 1902.07,
+      "knn_std_ms": 18.02,
+      "anomaly_score": 1.168516,
+      "ret": 1,
+      "baseline_score": 1.168516,
+      "score_deviation_pct": 0.0,
+      "ret_match": true
+    }
+  ],
+  "summary": {
+    "total_mean_ms": 2077.88,
+    "total_std_ms": 145.86,
+    "knn_mean_ms": 2016.02,
+    "knn_std_ms": 143.66,
+    "speedup_knn": "0.12x",
+    "speedup_total": "0.14x",
+    "max_score_deviation_pct": 1.89,
+    "all_ret_match": true,
+    "precision_pass": true
+  },
+  "finding": "FAISS-CPU is SLOWER than GPU cdist. GPU→CPU transfer + CPU search cannot beat GPU parallel cdist."
+}
