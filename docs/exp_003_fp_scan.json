@@ -1,0 +1,716 @@
+{
+  "date": "2026-04-14",
+  "based_on": "exp_002_fp16.json",
+  "task": "RU-006: Feature Pooling speed scan (no accuracy)",
+  "runs_per_image": 5,
+  "configs": [
+    {
+      "name": "baseline_no_pool",
+      "pool_type": null,
+      "pool_kernel": 1,
+      "query_reduction": "1x",
+      "queries_per_image": 131072,
+      "images": [
+        {
+          "name": "2.jpg",
+          "times_ms": [
+            126.2,
+            131.31,
+            133.89,
+            131.85,
+            131.35
+          ],
+          "mean_ms": 130.92,
+          "std_ms": 2.54,
+          "knn_times_ms": [
+            66.89,
+            69.18,
+            68.55,
+            69.51,
+            69.21
+          ],
+          "knn_mean_ms": 68.67,
+          "knn_std_ms": 0.94
+        },
+        {
+          "name": "5.jpg",
+          "times_ms": [
+            132.75,
+            131.83,
+            130.24,
+            130.92,
+            129.47
+          ],
+          "mean_ms": 131.04,
+          "std_ms": 1.15,
+          "knn_times_ms": [
+            69.95,
+            68.7,
+            69.13,
+            68.85,
+            68.87
+          ],
+          "knn_mean_ms": 69.1,
+          "knn_std_ms": 0.45
+        },
+        {
+          "name": "034-169-301(1)-temp5.jpg",
+          "times_ms": [
+            128.01,
+            127.41,
+            127.91,
+            126.48,
+            127.16
+          ],
+          "mean_ms": 127.39,
+          "std_ms": 0.55,
+          "knn_times_ms": [
+            69.01,
+            69.92,
+            69.58,
+            68.33,
+            68.98
+          ],
+          "knn_mean_ms": 69.16,
+          "knn_std_ms": 0.55
+        },
+        {
+          "name": "273-263-201(1)-temp5.jpg",
+          "times_ms": [
+            127.88,
+            131.31,
+            127.72,
+            127.97,
+            127.78
+          ],
+          "mean_ms": 128.53,
+          "std_ms": 1.39,
+          "knn_times_ms": [
+            68.02,
+            69.68,
+            68.63,
+            68.96,
+            68.67
+          ],
+          "knn_mean_ms": 68.79,
+          "knn_std_ms": 0.54
+        },
+        {
+          "name": "274-244-202(1)-temp2.jpg",
+          "times_ms": [
+            129.18,
+            127.36,
+            128.49,
+            127.78,
+            129.57
+          ],
+          "mean_ms": 128.48,
+          "std_ms": 0.83,
+          "knn_times_ms": [
+            69.19,
+            68.61,
+            68.6,
+            68.62,
+            69.07
+          ],
+          "knn_mean_ms": 68.82,
+          "knn_std_ms": 0.26
+        },
+        {
+          "name": "276-176-301(1)-temp5.jpg",
+          "times_ms": [
+            127.93,
+            127.86,
+            129.15,
+            129.77,
+            127.67
+          ],
+          "mean_ms": 128.48,
+          "std_ms": 0.83,
+          "knn_times_ms": [
+            67.86,
+            68.17,
+            68.97,
+            70.5,
+            68.41
+          ],
+          "knn_mean_ms": 68.78,
+          "knn_std_ms": 0.93
+        }
+      ],
+      "summary": {
+        "total_mean_ms": 129.14,
+        "total_std_ms": 1.36,
+        "knn_mean_ms": 68.89,
+        "knn_std_ms": 0.18
+      }
+    },
+    {
+      "name": "avg_pool_2x",
+      "pool_type": "avg",
+      "pool_kernel": 2,
+      "query_reduction": "4x",
+      "queries_per_image": 32768,
+      "images": [
+        {
+          "name": "2.jpg",
+          "times_ms": [
+            81.27,
+            82.01,
+            80.53,
+            82.01,
+            80.66
+          ],
+          "mean_ms": 81.3,
+          "std_ms": 0.63,
+          "knn_times_ms": [
+            17.49,
+            18.36,
+            17.32,
+            17.03,
+            16.23
+          ],
+          "knn_mean_ms": 17.29,
+          "knn_std_ms": 0.69
+        },
+        {
+          "name": "5.jpg",
+          "times_ms": [
+            78.74,
+            79.27,
+            79.02,
+            79.64,
+            79.39
+          ],
+          "mean_ms": 79.21,
+          "std_ms": 0.31,
+          "knn_times_ms": [
+            16.48,
+            16.33,
+            16.62,
+            15.98,
+            16.13
+          ],
+          "knn_mean_ms": 16.31,
+          "knn_std_ms": 0.23
+        },
+        {
+          "name": "034-169-301(1)-temp5.jpg",
+          "times_ms": [
+            75.54,
+            76.05,
+            76.62,
+            76.25,
+            76.7
+          ],
+          "mean_ms": 76.23,
+          "std_ms": 0.42,
+          "knn_times_ms": [
+            16.33,
+            16.79,
+            16.92,
+            16.57,
+            17.63
+          ],
+          "knn_mean_ms": 16.85,
+          "knn_std_ms": 0.44
+        },
+        {
+          "name": "273-263-201(1)-temp5.jpg",
+          "times_ms": [
+            78.04,
+            76.23,
+            82.35,
+            85.82,
+            87.99
+          ],
+          "mean_ms": 82.09,
+          "std_ms": 4.46,
+          "knn_times_ms": [
+            18.04,
+            16.85,
+            21.96,
+            25.32,
+            27.21
+          ],
+          "knn_mean_ms": 21.88,
+          "knn_std_ms": 4.01
+        },
+        {
+          "name": "274-244-202(1)-temp2.jpg",
+          "times_ms": [
+            88.64,
+            94.31,
+            92.63,
+            89.76,
+            88.85
+          ],
+          "mean_ms": 90.84,
+          "std_ms": 2.25,
+          "knn_times_ms": [
+            29.43,
+            35.93,
+            31.9,
+            28.16,
+            28.47
+          ],
+          "knn_mean_ms": 30.78,
+          "knn_std_ms": 2.89
+        },
+        {
+          "name": "276-176-301(1)-temp5.jpg",
+          "times_ms": [
+            91.64,
+            88.93,
+            93.23,
+            90.43,
+            87.62
+          ],
+          "mean_ms": 90.37,
+          "std_ms": 1.97,
+          "knn_times_ms": [
+            31.07,
+            29.01,
+            32.56,
+            29.1,
+            26.9
+          ],
+          "knn_mean_ms": 29.73,
+          "knn_std_ms": 1.94
+        }
+      ],
+      "summary": {
+        "total_mean_ms": 83.34,
+        "total_std_ms": 5.46,
+        "knn_mean_ms": 22.14,
+        "knn_std_ms": 6.03
+      }
+    },
+    {
+      "name": "avg_pool_4x",
+      "pool_type": "avg",
+      "pool_kernel": 4,
+      "query_reduction": "16x",
+      "queries_per_image": 8192,
+      "images": [
+        {
+          "name": "2.jpg",
+          "times_ms": [
+            74.19,
+            73.33,
+            72.4,
+            76.99,
+            69.66
+          ],
+          "mean_ms": 73.31,
+          "std_ms": 2.39,
+          "knn_times_ms": [
+            8.18,
+            7.16,
+            7.48,
+            10.37,
+            6.55
+          ],
+          "knn_mean_ms": 7.95,
+          "knn_std_ms": 1.32
+        },
+        {
+          "name": "5.jpg",
+          "times_ms": [
+            73.63,
+            204.89,
+            71.01,
+            73.87,
+            72.33
+          ],
+          "mean_ms": 99.15,
+          "std_ms": 52.88,
+          "knn_times_ms": [
+            7.45,
+            141.85,
+            9.15,
+            7.53,
+            10.08
+          ],
+          "knn_mean_ms": 35.21,
+          "knn_std_ms": 53.33
+        },
+        {
+          "name": "034-169-301(1)-temp5.jpg",
+          "times_ms": [
+            69.21,
+            72.22,
+            70.02,
+            70.8,
+            69.1
+          ],
+          "mean_ms": 70.27,
+          "std_ms": 1.15,
+          "knn_times_ms": [
+            8.5,
+            11.22,
+            9.31,
+            10.69,
+            8.27
+          ],
+          "knn_mean_ms": 9.6,
+          "knn_std_ms": 1.17
+        },
+        {
+          "name": "273-263-201(1)-temp5.jpg",
+          "times_ms": [
+            69.59,
+            72.13,
+            66.69,
+            66.89,
+            66.57
+          ],
+          "mean_ms": 68.37,
+          "std_ms": 2.19,
+          "knn_times_ms": [
+            8.88,
+            11.69,
+            6.68,
+            8.24,
+            6.98
+          ],
+          "knn_mean_ms": 8.49,
+          "knn_std_ms": 1.79
+        },
+        {
+          "name": "274-244-202(1)-temp2.jpg",
+          "times_ms": [
+            69.56,
+            68.33,
+            67.93,
+            71.8,
+            67.02
+          ],
+          "mean_ms": 68.93,
+          "std_ms": 1.65,
+          "knn_times_ms": [
+            10.25,
+            6.76,
+            7.39,
+            11.36,
+            7.47
+          ],
+          "knn_mean_ms": 8.65,
+          "knn_std_ms": 1.81
+        },
+        {
+          "name": "276-176-301(1)-temp5.jpg",
+          "times_ms": [
+            70.24,
+            73.18,
+            73.34,
+            68.33,
+            68.58
+          ],
+          "mean_ms": 70.73,
+          "std_ms": 2.17,
+          "knn_times_ms": [
+            9.13,
+            11.77,
+            13.42,
+            7.33,
+            7.87
+          ],
+          "knn_mean_ms": 9.9,
+          "knn_std_ms": 2.33
+        }
+      ],
+      "summary": {
+        "total_mean_ms": 75.13,
+        "total_std_ms": 10.86,
+        "knn_mean_ms": 13.3,
+        "knn_std_ms": 9.82
+      }
+    },
+    {
+      "name": "max_pool_2x",
+      "pool_type": "max",
+      "pool_kernel": 2,
+      "query_reduction": "4x",
+      "queries_per_image": 32768,
+      "images": [
+        {
+          "name": "2.jpg",
+          "times_ms": [
+            95.8,
+            95.16,
+            98.93,
+            98.73,
+            94.95
+          ],
+          "mean_ms": 96.71,
+          "std_ms": 1.75,
+          "knn_times_ms": [
+            29.35,
+            31.66,
+            34.15,
+            32.22,
+            28.94
+          ],
+          "knn_mean_ms": 31.26,
+          "knn_std_ms": 1.92
+        },
+        {
+          "name": "5.jpg",
+          "times_ms": [
+            92.83,
+            95.74,
+            94.82,
+            94.51,
+            92.55
+          ],
+          "mean_ms": 94.09,
+          "std_ms": 1.22,
+          "knn_times_ms": [
+            28.39,
+            29.24,
+            27.5,
+            31.11,
+            27.68
+          ],
+          "knn_mean_ms": 28.78,
+          "knn_std_ms": 1.31
+        },
+        {
+          "name": "034-169-301(1)-temp5.jpg",
+          "times_ms": [
+            86.17,
+            90.17,
+            94.22,
+            87.54,
+            92.93
+          ],
+          "mean_ms": 90.21,
+          "std_ms": 3.06,
+          "knn_times_ms": [
+            26.19,
+            28.32,
+            30.81,
+            26.48,
+            33.91
+          ],
+          "knn_mean_ms": 29.14,
+          "knn_std_ms": 2.9
+        },
+        {
+          "name": "273-263-201(1)-temp5.jpg",
+          "times_ms": [
+            96.06,
+            92.02,
+            97.33,
+            91.45,
+            90.18
+          ],
+          "mean_ms": 93.41,
+          "std_ms": 2.78,
+          "knn_times_ms": [
+            35.05,
+            31.44,
+            37.85,
+            32.62,
+            31.72
+          ],
+          "knn_mean_ms": 33.74,
+          "knn_std_ms": 2.42
+        },
+        {
+          "name": "274-244-202(1)-temp2.jpg",
+          "times_ms": [
+            90.66,
+            92.0,
+            95.97,
+            92.79,
+            89.29
+          ],
+          "mean_ms": 92.14,
+          "std_ms": 2.25,
+          "knn_times_ms": [
+            31.67,
+            29.3,
+            35.37,
+            30.55,
+            28.27
+          ],
+          "knn_mean_ms": 31.03,
+          "knn_std_ms": 2.45
+        },
+        {
+          "name": "276-176-301(1)-temp5.jpg",
+          "times_ms": [
+            89.02,
+            91.91,
+            91.03,
+            92.53,
+            89.16
+          ],
+          "mean_ms": 90.73,
+          "std_ms": 1.42,
+          "knn_times_ms": [
+            29.19,
+            32.44,
+            30.53,
+            33.03,
+            30.13
+          ],
+          "knn_mean_ms": 31.06,
+          "knn_std_ms": 1.44
+        }
+      ],
+      "summary": {
+        "total_mean_ms": 92.88,
+        "total_std_ms": 2.19,
+        "knn_mean_ms": 30.84,
+        "knn_std_ms": 1.62
+      }
+    },
+    {
+      "name": "max_pool_4x",
+      "pool_type": "max",
+      "pool_kernel": 4,
+      "query_reduction": "16x",
+      "queries_per_image": 8192,
+      "images": [
+        {
+          "name": "2.jpg",
+          "times_ms": [
+            78.11,
+            76.11,
+            72.53,
+            74.54,
+            75.44
+          ],
+          "mean_ms": 75.35,
+          "std_ms": 1.83,
+          "knn_times_ms": [
+            12.56,
+            10.8,
+            7.25,
+            7.86,
+            8.16
+          ],
+          "knn_mean_ms": 9.33,
+          "knn_std_ms": 2.02
+        },
+        {
+          "name": "5.jpg",
+          "times_ms": [
+            71.33,
+            77.07,
+            75.25,
+            71.75,
+            75.43
+          ],
+          "mean_ms": 74.17,
+          "std_ms": 2.24,
+          "knn_times_ms": [
+            6.67,
+            9.36,
+            11.67,
+            6.59,
+            7.5
+          ],
+          "knn_mean_ms": 8.36,
+          "knn_std_ms": 1.93
+        },
+        {
+          "name": "034-169-301(1)-temp5.jpg",
+          "times_ms": [
+            72.42,
+            71.11,
+            67.54,
+            69.12,
+            71.64
+          ],
+          "mean_ms": 70.37,
+          "std_ms": 1.79,
+          "knn_times_ms": [
+            12.55,
+            11.37,
+            7.46,
+            9.18,
+            8.45
+          ],
+          "knn_mean_ms": 9.8,
+          "knn_std_ms": 1.88
+        },
+        {
+          "name": "273-263-201(1)-temp5.jpg",
+          "times_ms": [
+            67.88,
+            67.56,
+            67.62,
+            70.23,
+            69.53
+          ],
+          "mean_ms": 68.56,
+          "std_ms": 1.1,
+          "knn_times_ms": [
+            7.06,
+            7.86,
+            6.53,
+            9.59,
+            10.62
+          ],
+          "knn_mean_ms": 8.33,
+          "knn_std_ms": 1.54
+        },
+        {
+          "name": "274-244-202(1)-temp2.jpg",
+          "times_ms": [
+            68.08,
+            69.88,
+            72.34,
+            68.13,
+            68.18
+          ],
+          "mean_ms": 69.32,
+          "std_ms": 1.65,
+          "knn_times_ms": [
+            7.24,
+            10.08,
+            10.12,
+            7.44,
+            7.74
+          ],
+          "knn_mean_ms": 8.52,
+          "knn_std_ms": 1.3
+        },
+        {
+          "name": "276-176-301(1)-temp5.jpg",
+          "times_ms": [
+            72.63,
+            68.9,
+            68.94,
+            71.05,
+            68.59
+          ],
+          "mean_ms": 70.02,
+          "std_ms": 1.57,
+          "knn_times_ms": [
+            10.12,
+            7.7,
+            7.61,
+            11.35,
+            6.96
+          ],
+          "knn_mean_ms": 8.75,
+          "knn_std_ms": 1.69
+        }
+      ],
+      "summary": {
+        "total_mean_ms": 71.3,
+        "total_std_ms": 2.54,
+        "knn_mean_ms": 8.85,
+        "knn_std_ms": 0.54
+      }
+    }
+  ],
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "pytorch": "2.11.0+cu128",
+  "peak_gpu_memory_mb": 738.0
+}
