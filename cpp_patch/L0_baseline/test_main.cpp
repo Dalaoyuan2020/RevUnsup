@@ -26,7 +26,7 @@ struct BenchResult {
 };
 
 int main() {
-    std::cout << "=== L0 Baseline Test ===" << std::endl;
+    std::cout << "=== L0-v2 Baseline Test (V2 6 images) ===" << std::endl;
 
     // 1. Init model
     const char* modelDir = "D:\\XYC_Dog_Agent\\Reverse_unsupervised\\code\\code\\test_ad_infer_new\\Model";
@@ -43,9 +43,15 @@ int main() {
         return -1;
     }
 
-    // 2. Test images
-    std::string imgDir = "D:\\XYC_Dog_Agent\\Reverse_unsupervised\\code\\code\\test_ad_infer_new\\Model\\";
-    std::vector<std::string> images = { "0.png", "5.jpg", "6.jpg", "7.jpg", "8.jpg" };
+    // 2. Test images (V2 six images from Python baseline RU-003)
+    std::vector<std::string> images = {
+        "D:\\RevUnsup\\cpp_patch\\test_images_v2\\2.jpg",
+        "D:\\RevUnsup\\cpp_patch\\test_images_v2\\5.jpg",
+        "D:\\RevUnsup\\cpp_patch\\test_images_v2\\034-169-301(1)-temp5.jpg",
+        "D:\\RevUnsup\\cpp_patch\\test_images_v2\\273-263-201(1)-temp5.jpg",
+        "D:\\RevUnsup\\cpp_patch\\test_images_v2\\274-244-202(1)-temp2.jpg",
+        "D:\\RevUnsup\\cpp_patch\\test_images_v2\\276-176-301(1)-temp5.jpg",
+    };
 
     const int NUM_RUNS = 5;
     const float THRESH = 0.1f;
@@ -53,7 +59,7 @@ int main() {
 
     // Warmup: 3 runs on first image
     {
-        cv::Mat warmup_img = cv::imread(imgDir + images[0]);
+        cv::Mat warmup_img = cv::imread(images[0]);
         if (!warmup_img.empty()) {
             std::cout << "\n--- Warmup (3 runs) ---" << std::endl;
             for (int i = 0; i < 3; i++) {
@@ -67,11 +73,11 @@ int main() {
         }
     }
 
-    // 3. Benchmark: 5 images x 5 runs
-    std::cout << "\n=== Benchmark: 5 images x " << NUM_RUNS << " runs ===" << std::endl;
+    // 3. Benchmark: 6 images x 5 runs
+    std::cout << "\n=== Benchmark: " << images.size() << " images x " << NUM_RUNS << " runs ===" << std::endl;
 
     for (const auto& img_name : images) {
-        std::string img_path = imgDir + img_name;
+        std::string img_path = img_name;
         cv::Mat img = cv::imread(img_path);
         if (img.empty()) {
             std::cerr << "WARNING: Cannot read " << img_path << std::endl;
@@ -79,7 +85,9 @@ int main() {
         }
 
         BenchResult br;
-        br.image_name = img_name;
+        // Extract just the filename for display
+        size_t last_sep = img_name.find_last_of("\\/");
+        br.image_name = (last_sep != std::string::npos) ? img_name.substr(last_sep + 1) : img_name;
         br.width = img.cols;
         br.height = img.rows;
 
