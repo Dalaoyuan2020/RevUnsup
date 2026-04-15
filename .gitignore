@@ -22,6 +22,12 @@ deploy/dll_wrapper/build/
 *.exe
 *.obj
 *.lib
+*.pdb
+*.pch
+*.iobj
+*.ipdb
+cpp_patch/**/x64/
+cpp_patch/**/*.tlog
 
 # C#
 deploy/csharp_ui/bin/
