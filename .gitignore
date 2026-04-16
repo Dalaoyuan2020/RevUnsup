@@ -28,6 +28,14 @@ deploy/dll_wrapper/build/
 *.ipdb
 cpp_patch/**/x64/
 cpp_patch/**/*.tlog
+cpp_patch/RU011_train_input/
+cpp_patch/RU011_train_output/
+cpp_patch/RU011_eval/test_images/
+cpp_patch/RU011_eval/*.dll
+cpp_patch/RU011_eval/*.exe
+cpp_patch/RU011_eval/*.obj
+cpp_patch/RU011_eval/*.exp
+cpp_patch/RU011_eval/*.txt
 
 # C#
 deploy/csharp_ui/bin/
