@@ -1,0 +1,67 @@
+=== L0-v2 Baseline Test (V2 6 images) ===
+Loading model from: D:\XYC_Dog_Agent\Reverse_unsupervised\code\code\test_ad_infer_new\Model
+modelPath:D:\XYC_Dog_Agent\Reverse_unsupervised\code\code\test_ad_infer_new\Model\model.ckpt
+mbmodelPath:D:\XYC_Dog_Agent\Reverse_unsupervised\code\code\test_ad_infer_new\Model\model.mb
+configPath:D:\XYC_Dog_Agent\Reverse_unsupervised\code\code\test_ad_infer_new\Model\modelConfig.yaml
+export is1
+creatModel returned: 0 (548.468 ms)
+
+--- Warmup (3 runs) ---
+1969  2152 1000 1000
+Warmup 1: 486.068 ms (ret=1)
+1969  2152 1000 1000
+Warmup 2: 55.8714 ms (ret=1)
+1969  2152 1000 1000
+Warmup 3: 35.7499 ms (ret=1)
+
+=== Benchmark: 6 images x 5 runs ===
+1969  2152 1000 1000
+1969  2152 1000 1000
+1969  2152 1000 1000
+1969  2152 1000 1000
+1969  2152 1000 1000
+D:\RevUnsup\cpp_patch\test_images_v2\2.jpg (1969x2152): 35.6667 41.0681 46.991 38.1607 35.471 | avg=39.4715 std=4.27295 ret=1 score=1
+1969  2152 1000 1000
+1969  2152 1000 1000
+1969  2152 1000 1000
+1969  2152 1000 1000
+1969  2152 1000 1000
+D:\RevUnsup\cpp_patch\test_images_v2\5.jpg (1969x2152): 38.4906 34.7117 35.9825 34.544 38.5363 | avg=36.453 std=1.75441 ret=1 score=1
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+D:\RevUnsup\cpp_patch\test_images_v2\034-169-301(1)-temp5.jpg (1009x777): 22.652 21.7921 22.0303 20.3889 19.8555 | avg=21.3438 std=1.04981 ret=1 score=1
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+D:\RevUnsup\cpp_patch\test_images_v2\273-263-201(1)-temp5.jpg (1009x777): 20.5722 20.0501 20.4249 21.3646 23.1465 | avg=21.1117 std=1.104 ret=1 score=1
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+D:\RevUnsup\cpp_patch\test_images_v2\274-244-202(1)-temp2.jpg (1009x777): 20.785 21.1507 20.4998 19.7596 21.4893 | avg=20.7369 std=0.591774 ret=1 score=1
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+1009  777 1000 1000
+D:\RevUnsup\cpp_patch\test_images_v2\276-176-301(1)-temp5.jpg (1009x777): 21.8106 20.2116 21.0084 20.7357 19.8674 | avg=20.7267 std=0.672012 ret=1 score=1
+
+=== Summary ===
+Image        | Size     | Run1    | Run2    | Run3    | Run4    | Run5    | Avg     | Std    | Score
+-------------|----------|---------|---------|---------|---------|---------|---------|--------|------
+2.jpg        | 1969x2152 |    35.7 |    41.1 |    47.0 |    38.2 |    35.5 |    39.5 |    4.3 | 1.0000
+5.jpg        | 1969x2152 |    38.5 |    34.7 |    36.0 |    34.5 |    38.5 |    36.5 |    1.8 | 1.0000
+034-169-301(1)-temp5.jpg | 1009x777  |    22.7 |    21.8 |    22.0 |    20.4 |    19.9 |    21.3 |    1.0 | 1.0000
+273-263-201(1)-temp5.jpg | 1009x777  |    20.6 |    20.1 |    20.4 |    21.4 |    23.1 |    21.1 |    1.1 | 1.0000
+274-244-202(1)-temp2.jpg | 1009x777  |    20.8 |    21.2 |    20.5 |    19.8 |    21.5 |    20.7 |    0.6 | 1.0000
+276-176-301(1)-temp5.jpg | 1009x777  |    21.8 |    20.2 |    21.0 |    20.7 |    19.9 |    20.7 |    0.7 | 1.0000
+
+Overall average: 26.6406 ms
+
+Done. Press Enter to exit...

@@ -1,0 +1,5 @@
+=== L0-v2 Baseline Test (V2 6 images) ===
+Loading model from: D:\XYC_Dog_Agent\Reverse_unsupervised\code\code\test_ad_infer_new\Model
+creatModel returned: 0 (556.865 ms)
+
+--- Warmup (3 runs) ---
